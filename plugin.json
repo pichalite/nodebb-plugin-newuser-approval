@@ -1,16 +1,21 @@
 {
-    "id": "nodebb-plugin-newuser-approval"
-   ,"name": "NodeBB New User Approval Plugin"
-   ,"description": "A plugin for NodeBB to allow admins to approve new users."
-   ,"url": "https://github.com/pichalite/nodebb-plugin-newuser-approval"
-   ,"library": "./library.js"
-   ,"staticDirs": {
-        "public": "public"
-    }
-   ,"templates": "public/templates"
-   ,"hooks": [
+    "id": "nodebb-plugin-newuser-approval",
+    "name": "NodeBB New User Approval Plugin",
+    "description": "A plugin for NodeBB to allow admins to approve new users.",
+    "url": "https://github.com/pichalite/nodebb-plugin-newuser-approval",
+    "library": "./library.js",
+    "templates": "templates",
+    "hooks": [
         { "hook": "static:app.load", "method": "init" }, 
         { "hook": "filter:admin.header.build", "method": "admin.menu" },
-        { "hook": "action:user.create", "method": "moveUserToGroup" }
-    ]
+        { "hook": "action:user.create", "method": "moveUserToGroup" },
+        { "hook": "filter:privileges.topics.filter", "method": "filterTids" },
+        { "hook": "filter:category.topics.get", "method": "filterCategory" },
+        { "hook": "filter:privileges.posts.filter", "method": "filterPids" },
+		{ "hook": "filter:categories.recent", "method": "filterPids" },
+		{ "hook": "filter:topic.build", "method": "filterPosts"}
+    ],
+    "scripts": [
+		"public/js/acp.js"
+	]
 }

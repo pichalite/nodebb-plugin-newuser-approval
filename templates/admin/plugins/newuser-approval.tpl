@@ -27,22 +27,21 @@
 	</div>
 </div>
 
-
 <div class="row">
 	<div class="col-lg-9">
 		<div class="panel panel-default">
 			<div class="panel-heading"><i class="fa fa-user"></i> New Users</div>
 			<div class="panel-body">
-				<p>Click on a user to move them to approved group</p>
-				    <ul id="users-container" class="new-users">
-				</ul>
+				<table class="table table-striped users-list">
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Topics</th>
+						<th>Posts</th>
+						<th></th>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>
 </div>
-
-<style>
-  @import url("/plugins/nodebb-plugin-newuser-approval/public/templates/admin/plugins/style.css");
-</style>
-
-<script src="/plugins/nodebb-plugin-newuser-approval/public/templates/admin/plugins/script.js"></script>
