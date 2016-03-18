@@ -15,7 +15,7 @@
 		{ "hook": "filter:categories.recent", "method": "filterPids" },
 		{ "hook": "filter:topic.build", "method": "filterPosts"}
     ],
-    "scripts": [
+    "acpScripts": [
 		"public/js/acp.js"
 	]
 }

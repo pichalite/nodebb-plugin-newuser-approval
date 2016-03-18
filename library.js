@@ -1,22 +1,24 @@
 'use strict';
 
-var	winston = module.parent.require('winston'),
-	Meta = module.parent.require('./meta'),
-	SocketAdmin   = module.parent.require('./socket.io/admin'),
-	Groups   = module.parent.require('./groups'),
-	User     = module.parent.require('./user'),
-	Posts = module.parent.require('./posts'),
-	Topics = module.parent.require('./topics'),
-	
-	Approval = {},
-	nonapprovedUserGroup = null,
-    approvedUserGroup = null;
+var winston = module.parent.require('winston');
+var	Meta = module.parent.require('./meta');
+var	SocketAdmin = module.parent.require('./socket.io/admin');
+var	Groups = module.parent.require('./groups');
+var	User = module.parent.require('./user');
+var	Posts = module.parent.require('./posts');
+var	Topics = module.parent.require('./topics');
+
+var	Approval = {};
+var	nonapprovedUserGroup = null;
+var	approvedUserGroup = null;
 
 Approval.init = function(params, callback) {
-	
+
 	SocketAdmin.approval = {
 		getUnapprovedUsers: function(socket, data, callback) {
-			Approval.getUnapprovedUsers({userData: true}, callback);
+			Approval.getUnapprovedUsers({
+				userData: true
+			}, callback);
 		},
 		approveUser: function(socket, data, callback) {
 			Approval.approveUser(data, callback);
@@ -25,23 +27,24 @@ Approval.init = function(params, callback) {
 			Approval.deleteUser(data, callback);
 		}
 	};
-	
+
 	function render(req, res, next) {
 		res.render('admin/plugins/newuser-approval', {});
 	}
 
-    Meta.settings.get('newuser-approval', function(err, settings) {
+	Meta.settings.get('newuser-approval', function(err, settings) {
 		if (!err && settings && settings.approvedUserGroup && settings.nonapprovedUserGroup) {
 			approvedUserGroup = settings.approvedUserGroup;
-            nonapprovedUserGroup = settings.nonapprovedUserGroup;
-		} else {
+			nonapprovedUserGroup = settings.nonapprovedUserGroup;
+		}
+		else {
 			winston.error('[plugins/newuser-approval] User groups not set!');
 		}
 	});
-    
+
 	params.router.get('/admin/plugins/newuser-approval', params.middleware.admin.buildHeader, render);
 	params.router.get('/api/admin/plugins/newuser-approval', render);
-    
+
 	callback();
 };
 
@@ -136,8 +139,7 @@ Approval.filterPosts = function(data, callback) {
 		    		return prev;
 		    	}, []);
 				callback(null, data);
-		    }
-		    else {
+		    } else {
 		    	callback(null, data);
 		    }
 		});
@@ -148,12 +150,10 @@ Approval.getUnapprovedUsers = function(options, callback) {
 	Groups.getMembers(nonapprovedUserGroup, 0, -1, function(err, members) {
 		if (err) {
 			winston.error(err.message);
-		}
-		else {
+		} else {
 			if(options.userData) {
 				User.getUsersData(members, callback);
-			}
-			else {
+			} else {
 				callback(null, members);
 			}
 		}
