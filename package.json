@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-newuser-approval",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A plugin for NodeBB to allow admins to approve new users.",
   "main": "library.js",
   "repository": {
