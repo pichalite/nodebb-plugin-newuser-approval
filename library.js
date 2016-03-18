@@ -1,16 +1,16 @@
 'use strict';
 
 var winston = module.parent.require('winston');
-var	Meta = module.parent.require('./meta');
-var	SocketAdmin = module.parent.require('./socket.io/admin');
-var	Groups = module.parent.require('./groups');
-var	User = module.parent.require('./user');
-var	Posts = module.parent.require('./posts');
-var	Topics = module.parent.require('./topics');
+var Meta = module.parent.require('./meta');
+var SocketAdmin = module.parent.require('./socket.io/admin');
+var Groups = module.parent.require('./groups');
+var User = module.parent.require('./user');
+var Posts = module.parent.require('./posts');
+var Topics = module.parent.require('./topics');
 
-var	Approval = {};
-var	nonapprovedUserGroup = null;
-var	approvedUserGroup = null;
+var Approval = {};
+var nonapprovedUserGroup = null;
+var approvedUserGroup = null;
 
 Approval.init = function(params, callback) {
 
@@ -49,16 +49,16 @@ Approval.init = function(params, callback) {
 };
 
 Approval.moveUserToGroup = function(userData) {
-    if (nonapprovedUserGroup != null) {
-        Groups.join(nonapprovedUserGroup, userData.uid);
-    }
+	if (nonapprovedUserGroup != null) {
+		Groups.join(nonapprovedUserGroup, userData.uid);
+	}
 };
 
 Approval.approveUser = function(userData, callback) {
-    if (approvedUserGroup != null) {
-        Groups.leave(nonapprovedUserGroup, userData.uid);
-        Groups.join(approvedUserGroup, userData.uid, callback);
-    }
+	if (approvedUserGroup != null) {
+		Groups.leave(nonapprovedUserGroup, userData.uid);
+		Groups.join(approvedUserGroup, userData.uid, callback);
+	}
 };
 
 Approval.deleteUser = function(userData, callback) {
