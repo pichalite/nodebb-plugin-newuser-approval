@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/pichalite/nodebb-plugin-newuser-approval",
   "nbbpm": {
-    "compatibility": "^1.0.0"
+    "compatibility": "~1.0.0"
   }
 }
