@@ -50,7 +50,7 @@ Approval.init = function(params, callback) {
 
 Approval.moveUserToGroup = function(userData) {
 	if (nonapprovedUserGroup != null) {
-		Groups.join(nonapprovedUserGroup, userData.uid);
+		Groups.join(nonapprovedUserGroup, userData.user.uid);
 	}
 };
 
